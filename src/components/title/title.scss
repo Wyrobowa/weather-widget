@@ -1,0 +1,12 @@
+.title {
+  text-transform: uppercase;
+  margin: 0.4em 0;
+  padding-top: 0.5em;
+
+  &--primary {
+    font-size: 3em;
+    font-weight: 600;
+    text-align: center;
+    color: darkgray;
+  }
+}
