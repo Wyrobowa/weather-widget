@@ -8,7 +8,7 @@ import RainLight from '../../assets/img/rain_light.png';
 import RainAndCloudy from '../../assets/img/rain_s_cloudy.png';
 import Sunny from '../../assets/img/sunny.png';
 
-const WeatherType = ({ type }) => {
+const WeatherImage = ({ type }) => {
   let imagePath = '';
 
   switch (type) {
@@ -33,14 +33,12 @@ const WeatherType = ({ type }) => {
   }
 
   return (
-    <div>
-      <img src={imagePath} alt={type} />
-    </div>
+    <img src={imagePath} alt={type} />
   );
 };
 
-WeatherType.propTypes = {
+WeatherImage.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default WeatherType;
+export default WeatherImage;

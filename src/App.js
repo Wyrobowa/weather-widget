@@ -28,17 +28,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://dev-weather-api.azurewebsites.net/api/city/${selectedCity.cityId}/weather?date=${selectedDate.inputValue}`)
-      .then(response => response.json())
-      .then((data) => {
-        if (!data.errors) {
-          setDetails({
-            citiesDetails: data,
-            visibility: true,
-            cityName: selectedCity.cityName,
-          });
-        }
-      });
+    if (selectedCity.cityId && selectedDate.inputValue) {
+      fetch(`http://dev-weather-api.azurewebsites.net/api/city/${selectedCity.cityId}/weather?date=${selectedDate.inputValue}`)
+        .then(response => response.json())
+        .then((data) => {
+          if (!data.errors) {
+            setDetails({
+              citiesDetails: data,
+              visibility: true,
+              cityName: selectedCity.cityName,
+            });
+          }
+        });
+    }
   }, [selectedCity, selectedDate]);
 
   const handleChange = (e) => {
@@ -60,42 +62,48 @@ function App() {
 
   return (
     <Fragment>
-      <Title
-        heading="h1"
-        type="primary"
-      >
-        Weather Widget
-      </Title>
+      <div className="main-title__wrap">
+        <Title
+          heading="h1"
+          type="primary"
+        >
+          Weather Widget
+        </Title>
+      </div>
 
-      <Select 
-        options={cities}
-        onChange={handleChange}
-      />
+      <div className="pickers__wrap">
+        <Select 
+          options={cities}
+          onChange={handleChange}
+        />
 
-      <div>
         <DatePicker
           todayButton="Today"
           dateFormat="yyyy-MM-dd"
           selected={selectedDate.startDate}
+          popperPlacement="top-end"
+          popperClassName="calendar"
           onChange={handleDateChange}
-          placeholderText="Click here to choose a date"
+          placeholderText=" Choose date"
         />
       </div>
 
       <div>
-        <span>{details.cityName}</span>
         {(details.visibility && details.citiesDetails)
           && (
-            <div>
-              <SelectedDate selectedDateWeatherDetails={details.citiesDetails[0]} />
+            <div className="selected-date__wrap">
+              <SelectedDate cityName={details.cityName} selectedDateWeatherDetails={details.citiesDetails[0]} />
+              <div className="separator"></div>
             </div>
           )
         }
+        
         {(details.visibility && details.citiesDetails)
           &&
             details.citiesDetails.map((item, index) => (
                 <div key={index}>
-                  <OtherDates dateWeatherDetails={item} />
+                  <OtherDates dateWeatherDetails={item} className="other-dates__wrap" />
+                  <div className="separator"></div>
                 </div>
             ))
         }

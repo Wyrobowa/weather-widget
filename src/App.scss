@@ -1,9 +1,39 @@
+@import './components/datePickerInput/datePickerInput.scss';
 @import './components/otherDates/otherDates.scss';
 @import './components/select/select.scss';
 @import './components/selectedDate/selectedDate.scss';
 @import './components/title/title.scss';
+@import './components/weatherImage/weatherImage.scss';
+@import './common/variables.scss';
+@import './common/mixins.scss';
 
-.App {
+body {
+  color: var(--color-grey-6);
+  font-size: 12px;
+
+  @include breakpoint("phone") {
+    font-size: 16px;
+  }
+}
+
+.main-title__wrap {
   text-align: center;
-  color: #212529;
+}
+
+.pickers__wrap {
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.separator {
+  border-top: 1px solid var(--color-grey-1);
+  margin: 0.25em 0;
+
+  @include breakpoint("phone_big") {
+    margin: 1em 0;
+  }
+}
+
+.text-space {
+  margin-bottom: 0.2em;
 }
