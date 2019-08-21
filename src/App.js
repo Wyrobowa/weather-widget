@@ -9,7 +9,7 @@ import SelectedDate from './components/selectedDate/SelectedDate';
 import OtherDates from './components/otherDates/OtherDates';
 
 import './App.scss';
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
   const [cities, setCities] = useState([]);
@@ -56,13 +56,13 @@ function App() {
     setSelectedDate({
       ...selectedDate,
       startDate: date,
-      inputValue: Moment(date).format('YYYY-MM-DD')
+      inputValue: Moment(date).format('YYYY-MM-DD'),
     });
   };
 
   return (
-    <Fragment>
-      <div className="main-title__wrap">
+    <section className="weather-widget">
+      <div className="weather-widget__title">
         <Title
           heading="h1"
           type="primary"
@@ -71,8 +71,8 @@ function App() {
         </Title>
       </div>
 
-      <div className="pickers__wrap">
-        <Select 
+      <div className="weather-widget__pickers">
+        <Select
           options={cities}
           onChange={handleChange}
         />
@@ -88,27 +88,29 @@ function App() {
         />
       </div>
 
-      <div>
+      <div className="weather-days">
         {(details.visibility && details.citiesDetails)
           && (
-            <div className="selected-date__wrap">
-              <SelectedDate cityName={details.cityName} selectedDateWeatherDetails={details.citiesDetails[0]} />
-              <div className="separator"></div>
+            <div className="weather-days__selected-date">
+              <SelectedDate
+                cityName={details.cityName}
+                selectedDateWeatherDetails={details.citiesDetails[0]}
+              />
             </div>
           )
         }
-        
-        {(details.visibility && details.citiesDetails)
-          &&
-            details.citiesDetails.map((item, index) => (
-                <div key={index}>
-                  <OtherDates dateWeatherDetails={item} className="other-dates__wrap" />
-                  <div className="separator"></div>
-                </div>
+
+        <div className="weather-days__other-dates">
+          {(details.visibility && details.citiesDetails)
+            && details.citiesDetails.map((item, index) => (
+              <div key={index} className="weather-days__other-date">
+                <OtherDates dateWeatherDetails={item} />
+              </div>
             ))
         }
+        </div>
       </div>
-    </Fragment>
+    </section>
   );
 }
 

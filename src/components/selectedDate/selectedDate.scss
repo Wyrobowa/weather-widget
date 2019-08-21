@@ -4,24 +4,15 @@
   color: var(--color-grey-4);
   flex-wrap: wrap;
 
-  & .title {
+  & .title,
+  &__date,
+  &__type
+  {
     width: 100%;
   }
 
   &__box {
     width: 50%;
-  }
-
-  &__flex {
-    display: flex;
-  }
-
-  &__date {
-    width: 100%;
-  }
-
-  &__type {
-    width: 100%;
   }
 
   &__type-img {
@@ -48,5 +39,9 @@
     .selected-date__value {
       font-weight: bolder;
     }
+  }
+
+  &--flex {
+    display: flex;
   }
 }

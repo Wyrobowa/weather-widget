@@ -13,7 +13,7 @@ const WeatherImage = ({ type }) => {
 
   switch (type) {
     case 'Cloudy':
-        imagePath = Cloudy;
+      imagePath = Cloudy;
       break;
     case 'PartlyCloudy':
       imagePath = PartlyCloudy;
@@ -33,7 +33,7 @@ const WeatherImage = ({ type }) => {
   }
 
   return (
-    <img src={imagePath} alt={type} />
+    <img src={imagePath} alt={type} className="weather-image" />
   );
 };
 

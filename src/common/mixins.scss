@@ -7,6 +7,7 @@ $break_point5: if($rwd, 980px, 1px);
 $break_point6: if($rwd, 1024px, 1px);
 $break_point7: if($rwd, 1200px, 1px);
 $break_point8: if($rwd, 1370px, 1px);
+
 @mixin breakpoint($name) {
   @if $name == "phone_small" {
     @media screen and (min-width: $break_point1) {

@@ -4,23 +4,34 @@
   color: var(--color-grey-4);
   align-items: center;
 
-  &__flex {
+  &--flex {
     display: flex;
   }
 
   &__item {
     width: 25%;
     
-    label {
+    .other-dates__label {
       display: block;
     }
   }
 
-  &__img img {
+  &__img .weather-image {
     width: 50px; 
   }
 
   &__pollen {
     text-align: center;
+  }
+}
+
+@include breakpoint(tablet) {
+  .other-dates {
+    display: block;
+
+    &__item {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
