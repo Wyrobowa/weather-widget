@@ -1,6 +1,6 @@
+@import './common/datePickerInput.scss';
 @import './common/variables.scss';
 @import './common/mixins.scss';
-@import './components/datePickerInput/datePickerInput.scss';
 @import './components/otherDates/otherDates.scss';
 @import './components/selectedDate/selectedDate.scss';
 @import './components/title/title.scss';
@@ -8,6 +8,10 @@
 body {
   color: var(--color-grey-6);
   font-size: 12px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 
   @include breakpoint("phone") {
     font-size: 16px;
