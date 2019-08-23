@@ -3,4 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// web component
+class WeatherWidget extends HTMLElement {
+  connectedCallback() {
+    const mountPoint = document.createElement('div');
+    ReactDOM.render(<App />, mountPoint);
+    this.appendChild(mountPoint);
+  }
+}
+
+customElements.define('weather-widget', WeatherWidget);

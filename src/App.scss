@@ -2,7 +2,6 @@
 @import './common/mixins.scss';
 @import './components/datePickerInput/datePickerInput.scss';
 @import './components/otherDates/otherDates.scss';
-@import './components/select/select.scss';
 @import './components/selectedDate/selectedDate.scss';
 @import './components/title/title.scss';
 
@@ -28,6 +27,24 @@ body {
     text-align: center;
   }
 
+  & .select {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--color-grey-5);
+    outline: 0;
+    background: transparent;
+    border: none;
+    margin-right: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    @include breakpoint("phone") {
+      font-size: 2em;
+    }
+  }
+
   &__pickers {
     display: flex;
     margin-bottom: 1em;
@@ -45,8 +62,10 @@ body {
     }
   }
 
-  @include breakpoint(tablet) {
-    .weather-days__other-dates {
+  .weather-days__other-dates{
+    padding: 0.5em;
+
+    @include breakpoint("tablet") {
       display: inline-flex;
       width: 100%;
       margin-top: 2em;

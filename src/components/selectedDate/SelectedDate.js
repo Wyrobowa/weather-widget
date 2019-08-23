@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import Moment from 'moment';
 
 // components
-import Title from '../title/Title';
 import WeatherImage from '../weatherImage/WeatherImage';
 import WeatherType from '../weatherType/WeatherType';
 
-const SelectedDate = ({ cityName, selectedDateWeatherDetails }) => (
+const SelectedDate = ({ selectedDateWeatherDetails }) => (
   <div className="selected-date selected-date--flex">
-    <Title heading="h2" type="secondary">{cityName}</Title>
     <div className="selected-date__date text-space">
       {Moment(selectedDateWeatherDetails.date).format('dddd, MMMM do')}
     </div>
@@ -49,7 +47,6 @@ const SelectedDate = ({ cityName, selectedDateWeatherDetails }) => (
 );
 
 SelectedDate.propTypes = {
-  cityName: PropTypes.string.isRequired,
   selectedDateWeatherDetails: PropTypes.object.isRequired,
 };
 

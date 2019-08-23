@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import Moment from 'moment';
+import Select from 'react-select';
 
 // components
 import Title from './components/title/Title';
-import Select from './components/select/Select';
 import SelectedDate from './components/selectedDate/SelectedDate';
 import OtherDates from './components/otherDates/OtherDates';
 
@@ -12,8 +12,11 @@ import './App.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
-  const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState({});
+  const [cities, setCities] = useState([{
+    value: 0,
+    label: '',
+  }]);
+  const [selectedCity, setSelectedCity] = useState(null);
   const [selectedDate, setSelectedDate] = useState({});
   const [details, setDetails] = useState({
     visibility: false,
@@ -23,33 +26,34 @@ function App() {
     fetch('http://dev-weather-api.azurewebsites.net/api/city')
       .then(response => response.json())
       .then((data) => {
-        setCities(data);
+        const parsedData = [];
+        data.map((city) => {
+          parsedData.push({
+            value: city.id,
+            label: city.name,
+          });
+        });
+        setCities(parsedData);
       });
   }, []);
 
   useEffect(() => {
-    if (selectedCity.cityId && selectedDate.inputValue) {
-      fetch(`http://dev-weather-api.azurewebsites.net/api/city/${selectedCity.cityId}/weather?date=${selectedDate.inputValue}`)
+    if (selectedCity && selectedCity.value && selectedDate.inputValue) {
+      fetch(`http://dev-weather-api.azurewebsites.net/api/city/${selectedCity.value}/weather?date=${selectedDate.inputValue}`)
         .then(response => response.json())
         .then((data) => {
           if (!data.errors) {
             setDetails({
               citiesDetails: data,
               visibility: true,
-              cityName: selectedCity.cityName,
             });
           }
         });
     }
   }, [selectedCity, selectedDate]);
 
-  const handleChange = (e) => {
-    e.persist();
-    const index = e.target.selectedIndex;
-    setSelectedCity({
-      cityId: e.target.value,
-      cityName: e.target[index].text,
-    });
+  const handleChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
   };
 
   const handleDateChange = (date) => {
@@ -73,8 +77,11 @@ function App() {
 
       <div className="weather-widget__pickers">
         <Select
+          value={selectedCity}
           options={cities}
           onChange={handleChange}
+          className="select"
+          placeholder="Choose city"
         />
 
         <DatePicker
@@ -84,7 +91,7 @@ function App() {
           popperPlacement="top-end"
           popperClassName="calendar"
           onChange={handleDateChange}
-          placeholderText=" Choose date"
+          placeholderText="Choose date"
         />
       </div>
 

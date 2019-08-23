@@ -1,18 +1,29 @@
-.react-datepicker__input-container input {
-  display: block;
-  width: 100%;
-  font-size: 1em;
-  font-weight: 600;
-  color: var(--color-grey-5);
-  height: 3em;
-  padding: 0 0.5em;
-  outline: 0;
-  background: transparent;
-  border: 1px solid var(--color-grey-1);
-  border-radius: 0.4em;
-  box-sizing: border-box;
-  box-shadow: var(--box-sh-dark);
-  text-align: center;
+.react-datepicker__input-container {
+  @include breakpoint("phone") {
+    height: 100%;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--color-grey-5);
+    min-height: 38px;
+    padding: 0 0.5em;
+    outline: 0;
+    background: transparent;
+    border: 1px solid var(--color-grey-border-pickers);
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    @include breakpoint("phone") {
+      height: 100%;
+    }
+  }
 }
 
 .react-datepicker-popper {
