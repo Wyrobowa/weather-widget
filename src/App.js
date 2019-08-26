@@ -64,6 +64,13 @@ function App() {
     });
   };
 
+  const customStyles = {
+    option: provided => ({
+      ...provided,
+      fontSize: '0.5em',
+    }),
+  };
+
   return (
     <section className="weather-widget">
       <div className="weather-widget__title">
@@ -82,6 +89,7 @@ function App() {
           onChange={handleChange}
           className="select"
           placeholder="Choose city"
+          styles={customStyles}
         />
 
         <DatePicker
